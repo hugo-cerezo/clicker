@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "clicker",
+    "slug": "clicker",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
