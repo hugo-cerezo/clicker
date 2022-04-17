@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import Fruits from "./Fruits";
 // import Score from "./Score";
 import Shop from "./Shop";
-import { ProgressBar } from "react-bootstrap";
 
 class Main extends Component {
     constructor(props) {
@@ -25,11 +24,10 @@ class Main extends Component {
         return this.state.fuits.map((item, key) => {
             key += 1;
             return (
-                <View style={[styles.container, {flexDirection: "collumn"}]}>
+                <View key={key}>
                     <Fruits key={key} name={item} id={key} f={this.handleIncrement} />
-                    <ProgressBar name={item} animated now={key} />
-                </View>                
-                
+                </View>
+
             );
         });
     }
