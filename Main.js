@@ -33,8 +33,10 @@ class Main extends Component {
     }
 
     render() {
+        console.log(this.state)
         return (
             <View>
+                <Shop fruits={this.state.fruits}/>
                 <Text>score : {Math.floor(this.state.score)}</Text>
                 {this.renderFruits()}
             </View>

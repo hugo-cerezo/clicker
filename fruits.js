@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Text, StyleSheet, View, Button } from "react-native";
+import React, {Component} from "react";
+import {StyleSheet, View, Button} from "react-native";
 
 class Fruits extends Component {
     constructor(props) {
@@ -28,18 +28,17 @@ class Fruits extends Component {
     }
 
     increment() {
-        if (this.state.timer == 0) {
-            console.log('increment');
+        if (this.state.timer === 0) {
             const interval = setInterval(() => {
-                this.setState((prev) => ({ timer: prev.timer + 1 }));
-                if (this.state.timer == 100) {
-                    if (this.state.isAuto == 0) {
-                        this.setState((prev) => ({ timer: 0 }));
+                this.setState((prev) => ({timer: prev.timer + 1}));
+                if (this.state.timer === 100) {
+                    if (this.state.isAuto === 0) {
+                        this.setState(() => ({timer: 0}));
                         this.updateScore();
                         return clearInterval(interval);
                     }
 
-                    this.setState((prev) => ({ timer: 0 }));
+                    this.setState(() => ({timer: 0}));
                     this.updateScore()
                 }
             }, this.state.time)
@@ -48,7 +47,7 @@ class Fruits extends Component {
 
     render() {
         return (
-            <View >
+            <View>
                 <Button
                     onPress={this.increment}
                     title={this.state.name}
@@ -56,9 +55,9 @@ class Fruits extends Component {
                     accessibilityLabel="Learn more about this purple button"
                 />
                 <View style={styles.box}>
-                    <View style={{ width: this.state.timer + "%", height: '20px', backgroundColor: "white" }}></View>
+                    <View style={{width: this.state.timer + "%", height: '20px', backgroundColor: "white"}}></View>
                 </View>
-            </View >
+            </View>
         );
     }
 }
