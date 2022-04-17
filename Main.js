@@ -9,7 +9,7 @@ class Main extends Component {
         super(props);
         this.state = {
             componentName: "Main",
-            fuits: ['abricot', 'apple', 'cherry', 'kiwi', 'lemon', 'orange', 'peach', 'pineapple', 'strawberry', 'watermelon'],
+            fruits: ['abricot', 'apple', 'cherry', 'kiwi', 'lemon', 'orange', 'peach', 'pineapple', 'strawberry', 'watermelon'],
             score: 0,
         };
 
@@ -21,7 +21,7 @@ class Main extends Component {
     }
 
     renderFruits() {
-        return this.state.fuits.map((item, key) => {
+        return this.state.fruits.map((item, key) => {
             key += 1;
             return (
                 <View key={key}>
