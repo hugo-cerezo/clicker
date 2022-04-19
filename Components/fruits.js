@@ -14,7 +14,7 @@ class Fruits extends Component {
     }
 
     updateScore() {
-        this.props.handleScore(this.props.lvl * this.props.value * 1.15)
+        this.props.handleScore(this.props.lvl * this.props.value)
     }
 
     increment() {
@@ -31,7 +31,7 @@ class Fruits extends Component {
                     this.setState(() => ({timer: 0}));
                     this.updateScore()
                 }
-            }, 1000 / 60 * (this.props.lvl * 1.15))
+            }, 1000 / 60 * (this.props.progressTime))
         }
     };
 

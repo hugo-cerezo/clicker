@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import {Button, StyleSheet, Text, View} from "react-native";
+import React, { Component } from "react";
+import { Button, StyleSheet, Text, View } from "react-native";
 
 class Shop extends Component {
     constructor(props) {
@@ -9,6 +9,11 @@ class Shop extends Component {
         }
 
         this.toggleShopElements = this.toggleShopElements.bind(this);
+    }
+
+    updateTime(fruit){
+        if (this.props.fruits[fruit].isUnlocked === false) return;
+        this.props.handleTime(fruit)
     }
 
     updateUnlock(fruit) {
@@ -32,6 +37,7 @@ class Shop extends Component {
     }
 
     renderShopElements() {
+        
         return Object.keys(this.props.fruits).map((fruit) => {
             return (
                 <View key={fruit} style={styles.buttonWrapper}>
@@ -42,14 +48,20 @@ class Shop extends Component {
                         disabled={this.props.fruits[fruit].isUnlocked}
                     />
                     <Button
-                        title={"lvl:" + this.props.fruits[fruit].lvl + " ($" + this.props.fruits[fruit].lvl * this.props.fruits[fruit].value + ')'}
+                        title={"lvl:" + this.props.fruits[fruit].lvl + " ($" + Math.floor(this.props.fruits[fruit].lvl * this.props.fruits[fruit].value * 10) + ')'}
                         color="#841584"
                         onPress={() => this.updateLvl(fruit)}
                         disabled={!this.props.fruits[fruit].isUnlocked}
                     />
                     <Button
+                        title={"time:" + " ($" + Math.floor(this.props.fruits[fruit].progressPrice) + ')'}
+                        color="#841584"
+                        onPress={() => this.updateTime(fruit)}
+                        disabled={!this.props.fruits[fruit].isUnlocked}
+                    />
+                    <Button
                         title={this.props.fruits[fruit].isAuto === false ?
-                            "auto ($" + this.props.fruits[fruit].lvl * this.props.fruits[fruit].value * 1000 + ")" : "unlocked"
+                            "auto ($" + Math.floor(this.props.fruits[fruit].lvl * this.props.fruits[fruit].value * 1000) + ")" : "unlocked"
                         }
                         color="#841584"
                         onPress={() => this.updateAuto(fruit)}
@@ -62,7 +74,7 @@ class Shop extends Component {
     }
 
     toggleShopElements() {
-        return this.setState(() => ({visible: this.state.visible === "none" ? "block" : "none"}));
+        return this.setState(() => ({ visible: this.state.visible === "none" ? "block" : "none" }));
     }
 
     render() {
@@ -73,7 +85,7 @@ class Shop extends Component {
                     title={"shop"}
                     color="#841584"
                 />
-                <View style={{display: this.state.visible, backgroundColor: "#841584"}} hidden={true}>
+                <View style={{ display: this.state.visible, backgroundColor: "#841584" }} hidden={true}>
                     {this.renderShopElements()}
                 </View>
             </View>
@@ -85,7 +97,7 @@ class Shop extends Component {
 const styles = StyleSheet.create({
     buttonWrapper: {
         display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
+        gridTemplateColumns: "repeat(4, 1fr)",
         gridTemplateRows: "1fr",
     },
     text: {
