@@ -1,21 +1,11 @@
 import React, {Component} from "react";
-import {StyleSheet, View, Button} from "react-native";
+import {Button, StyleSheet, View} from "react-native";
 
 class Fruits extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            componentName: "Fruits",
             name: this.props.name,
-            lvl: 1,
-            time: 1000 / 60 * (this.props.id * 1.15),
-            value: 1 * (this.props.id * 1.15),
-            auto: 0,
-            upgrade: 10 * (this.props.id * 1.15),
-            buy: 25 * (this.props.id * 1.15),
-            unlock: 0,
-            speed: 20 * (this.props.id * 1.15),
-            isAuto: 0,
             timer: 0,
         };
 
@@ -24,7 +14,7 @@ class Fruits extends Component {
     }
 
     updateScore() {
-        this.props.f(this.state.value)
+        this.props.handleScore(this.props.lvl * this.props.value * 1.15)
     }
 
     increment() {
@@ -32,7 +22,7 @@ class Fruits extends Component {
             const interval = setInterval(() => {
                 this.setState((prev) => ({timer: prev.timer + 1}));
                 if (this.state.timer === 100) {
-                    if (this.state.isAuto === 0) {
+                    if (this.props.isAuto === false) {
                         this.setState(() => ({timer: 0}));
                         this.updateScore();
                         return clearInterval(interval);
@@ -41,7 +31,7 @@ class Fruits extends Component {
                     this.setState(() => ({timer: 0}));
                     this.updateScore()
                 }
-            }, this.state.time)
+            }, 1000 / 60 * (this.props.lvl * 1.15))
         }
     };
 
@@ -53,9 +43,10 @@ class Fruits extends Component {
                     title={this.state.name}
                     color="#841584"
                     accessibilityLabel="Learn more about this purple button"
+                    disabled={!this.props.isUnlocked}
                 />
                 <View style={styles.box}>
-                    <View style={{width: this.state.timer + "%", height: '20px', backgroundColor: "white"}}></View>
+                    <View style={{width: this.state.timer + "%", height: '20px', backgroundColor: "white"}}/>
                 </View>
             </View>
         );

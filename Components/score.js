@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import React, {Component} from "react";
+import {Button, Text, View} from "react-native";
 
 class Score extends Component {
     constructor(props) {
