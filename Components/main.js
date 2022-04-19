@@ -9,7 +9,7 @@ class Main extends Component {
         super(props);
         this.state = {
             componentName: "Main",
-            score: 0,
+            score: 6000,
             shopVisible: false,
             fruits: {
                 apple: {lvl: 1, isAuto: false, value: 1, isUnlocked: true},
@@ -38,7 +38,7 @@ class Main extends Component {
     }
 
     handleLvl(fruit) {
-        if (this.state.score > this.state.fruits[fruit].lvl * this.state.fruits[fruit].value) {
+        if (this.state.score >= this.state.fruits[fruit].lvl * this.state.fruits[fruit].value) {
             let state = this.state;
             state.fruits[fruit].lvl++;
             state.score -= this.state.fruits[fruit].lvl * this.state.fruits[fruit].value;
@@ -49,7 +49,7 @@ class Main extends Component {
     }
 
     handleAuto(fruit) {
-        if (this.state.score > this.state.fruits[fruit].lvl * this.state.fruits[fruit].value) {
+        if (this.state.score >= this.state.fruits[fruit].lvl * this.state.fruits[fruit].value) {
             let state = this.state;
             state.fruits[fruit].isAuto = true;
             state.score -= this.state.fruits[fruit].lvl * this.state.fruits[fruit].value * 1000;
@@ -82,6 +82,7 @@ class Main extends Component {
                       handleLvl={this.handleLvl}
                       handleAuto={this.handleAuto}
                       handleUnlock={this.handleUnlock}
+                      score={this.state.score}
                 />
                 <Text>score : {Math.floor(this.state.score)}</Text>
                 {this.renderFruits()}

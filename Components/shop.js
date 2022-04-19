@@ -25,6 +25,12 @@ class Shop extends Component {
         this.props.handleAuto(fruit);
     }
 
+    disableAuto(fruit) {
+        if (this.props.fruits[fruit].isUnlocked === false) return true;
+        if (this.props.fruits[fruit].isAuto === true) return true;
+        return this.props.fruits[fruit].lvl * this.props.fruits[fruit].value * 1000 > this.props.score;
+    }
+
     renderShopElements() {
         return Object.keys(this.props.fruits).map((fruit) => {
             return (
@@ -42,10 +48,12 @@ class Shop extends Component {
                         disabled={!this.props.fruits[fruit].isUnlocked}
                     />
                     <Button
-                        title={"auto ($" + this.props.fruits[fruit].lvl * this.props.fruits[fruit].value * 1000 + ")"}
+                        title={this.props.fruits[fruit].isAuto === false ?
+                            "auto ($" + this.props.fruits[fruit].lvl * this.props.fruits[fruit].value * 1000 + ")" : "unlocked"
+                        }
                         color="#841584"
                         onPress={() => this.updateAuto(fruit)}
-                        disabled={this.props.fruits[fruit].isUnlocked === true && this.props.fruits[fruit].isAuto === true}
+                        disabled={this.disableAuto(fruit)}
                     />
                 </View>
 
@@ -69,7 +77,8 @@ class Shop extends Component {
                     {this.renderShopElements()}
                 </View>
             </View>
-        );
+        )
+            ;
     }
 }
 
